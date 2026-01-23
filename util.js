@@ -51,3 +51,16 @@ export function reverseCompare(compareFn) {
 export function defaultDiff(a, b) {
   return Number(a) - Number(b);
 }
+
+
+export function printNodeVis(node, prefix = "", isLast = true) {
+  if (node === null) return;
+
+  console.log(prefix + (isLast ? "└── " : "├── ") + node.key);
+
+  const children = [node.left, node.right].filter((n) => n !== null);
+  children.forEach((child, i) => {
+    const newPrefix = prefix + (isLast ? "    " : "│   ");
+    printNode(child, newPrefix, i === children.length - 1);
+  });
+}

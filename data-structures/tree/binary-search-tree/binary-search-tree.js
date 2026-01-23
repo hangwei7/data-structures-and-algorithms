@@ -1,4 +1,4 @@
-import { Compare, defaultCompare } from "../../../util.js";
+import { Compare, defaultCompare, printNodeVis } from "../../../util.js";
 import { Node } from "../../models/node.js";
 
 export class BinarySearchTree {
@@ -32,6 +32,20 @@ export class BinarySearchTree {
       }
     }
   }
+
+  // 中序遍历
+  inOrderTraverse(callback) {
+    this.inOrderTraverseNode(this.root, callback)
+  }
+
+  // 中序遍历 - 辅助方法
+  inOrderTraverseNode(node, callback) {
+    if (node != null) {
+      this.inOrderTraverseNode(node.left, callback)
+      callback(node.key)
+      this.inOrderTraverseNode(node.right, callback)
+    }
+  }
 }
 
 const tree = new BinarySearchTree();
@@ -53,18 +67,11 @@ const tree = new BinarySearchTree();
 
 // console.log(JSON.stringify(tree, null, 2));
 
-function printNode(node, prefix = "", isLast = true) {
-  if (node === null) return;
-
-  console.log(prefix + (isLast ? "└── " : "├── ") + node.key);
-
-  const children = [node.left, node.right].filter((n) => n !== null);
-  children.forEach((child, i) => {
-    const newPrefix = prefix + (isLast ? "    " : "│   ");
-    printNode(child, newPrefix, i === children.length - 1);
-  });
-}
+const printNode = (value) => console.log(value)
 
 // 使用方式：
 console.log("Binary Search Tree:");
-printNode(tree.root);
+// printNodeVis(tree.root);
+
+tree.inOrderTraverse(printNode)
+
