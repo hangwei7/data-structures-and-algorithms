@@ -9,14 +9,16 @@ export class BinarySearchTree {
 
   insert(key) {
     if (this.root === null) {
-      this.root = new Node(key);
+      this.root = new Node(key)
     } else {
-      this.insertNode(this.root, key);
+      this.insertNode(this.root, key)
     }
   }
 
   insertNode(node, key) {
     if (this.compareFn(key, node.key) === Compare.LESS_THAN) {
+      // 如果连基础版的二叉搜索树都没有办法独立做到，何谈AVL树/红黑树？
+      // 冷静，思考，动起来。
       if (node.left === null) {
         node.left = new Node(key)
       } else {
@@ -34,13 +36,20 @@ export class BinarySearchTree {
 
 const tree = new BinarySearchTree();
 
-tree.insert(5);
-tree.insert(3);
-tree.insert(7);
-tree.insert(2);
-tree.insert(4);
-tree.insert(6);
-tree.insert(8);
+    tree.insert(11);
+    tree.insert(7);
+    tree.insert(15);
+    tree.insert(5);
+    tree.insert(3);
+    tree.insert(9);
+    tree.insert(8);
+    tree.insert(10);
+    tree.insert(13);
+    tree.insert(12);
+    tree.insert(14);
+    tree.insert(20);
+    tree.insert(18);
+    tree.insert(25);
 
 // console.log(JSON.stringify(tree, null, 2));
 
