@@ -1,0 +1,13 @@
+{
+  "name": "data-structures-and-algorithms",
+  "version": "1.0.0",
+  "description": "Learning data structures and algorithms in JavaScript",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["algorithms", "data-structures", "javascript"],
+  "author": "Your Name",
+  "license": "MIT"
+}
