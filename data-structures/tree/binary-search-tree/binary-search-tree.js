@@ -72,6 +72,5 @@ const printNode = (value) => console.log(value)
 // 使用方式：
 console.log("Binary Search Tree:");
 // printNodeVis(tree.root);
-
 tree.inOrderTraverse(printNode)
 

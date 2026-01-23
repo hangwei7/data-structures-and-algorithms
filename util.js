@@ -61,6 +61,6 @@ export function printNodeVis(node, prefix = "", isLast = true) {
   const children = [node.left, node.right].filter((n) => n !== null);
   children.forEach((child, i) => {
     const newPrefix = prefix + (isLast ? "    " : "│   ");
-    printNode(child, newPrefix, i === children.length - 1);
+    printNodeVis(child, newPrefix, i === children.length - 1);
   });
 }
