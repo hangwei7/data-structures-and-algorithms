@@ -95,7 +95,7 @@ export class BinarySearchTree {
     return this.maxNode(this.root)
   }
 
-  // 搜索二叉搜索树的最大值 - 赋值方法
+  // 搜索二叉搜索树的最大值 - 辅助方法
   maxNode(node) {
     let current = node
     while(current != null && current.right != null) {
@@ -104,7 +104,24 @@ export class BinarySearchTree {
     return current
   }
 
-  
+  // 二叉搜索树中搜索特定的值
+  search(key) {
+    return this.searchNode(this.root, key)
+  }
+
+  // 二叉搜索树中搜索特定的值 - 辅助方法
+  searchNode(node, key) {
+    if (node == null) {
+      return false
+    }
+    if (this.compareFn(key, node.key) === Compare.LESS_THAN) {
+      return this.searchNode(node.left, key)
+    } else if (this.compareFn(key, node.key) === Compare.BIGGER_THAN) {
+      return this.searchNode(node.right, key)
+    } else {
+      return true
+    }
+  }
 }
 
 const printNode = (value) => console.log(value)
@@ -135,6 +152,7 @@ console.log("Binary Search Tree:");
 // tree.preOrderTraverse(printNode)
 // tree.postOrderTraverse(printNode)
 // console.log(tree.min());
-console.log(tree.max());
+// console.log(tree.max());
+// console.log(tree.search(8));
 
 
