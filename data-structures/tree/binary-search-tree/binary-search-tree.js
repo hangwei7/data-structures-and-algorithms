@@ -61,7 +61,22 @@ export class BinarySearchTree {
       this.preOrderTraverseNode(node.right, callback)
     }
   }
+
+  // 后序遍历
+  postOrderTraverse(callback) {
+    this.postOrderTraverseNode(this.root, callback)
+  }
+
+  // 后序遍历 - 辅助方法
+  postOrderTraverseNode(node, callback) {
+    if (node != null) {
+      this.postOrderTraverseNode(node.left, callback)
+      this.postOrderTraverseNode(node.right, callback)
+      callback(node.key)
+    }
+  }
 }
+
 const printNode = (value) => console.log(value)
 
 const tree = new BinarySearchTree();
@@ -87,5 +102,6 @@ console.log("Binary Search Tree:");
 // console.log(JSON.stringify(tree, null, 2));
 // printNodeVis(tree.root);
 // tree.inOrderTraverse(printNode)
-tree.preOrderTraverse(printNode)
+// tree.preOrderTraverse(printNode)
+tree.postOrderTraverse(printNode)
 
