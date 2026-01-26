@@ -35,6 +35,7 @@ export class BinarySearchTree {
 
   // 中序遍历
   inOrderTraverse(callback) {
+    // 我要如何遍历一棵树？
     this.inOrderTraverseNode(this.root, callback)
   }
 
@@ -46,31 +47,45 @@ export class BinarySearchTree {
       this.inOrderTraverseNode(node.right, callback)
     }
   }
+
+  // 先序遍历
+  preOrderTraverse(callback) {
+    this.preOrderTraverseNode(this.root, callback)
+  }
+
+  // 先序遍历 - 辅助方法
+  preOrderTraverseNode(node, callback) {
+    if (node != null) {
+      callback(node.key)
+      this.preOrderTraverseNode(node.left, callback)
+      this.preOrderTraverseNode(node.right, callback)
+    }
+  }
 }
+const printNode = (value) => console.log(value)
 
 const tree = new BinarySearchTree();
 
-    tree.insert(11);
-    tree.insert(7);
-    tree.insert(15);
-    tree.insert(5);
-    tree.insert(3);
-    tree.insert(9);
-    tree.insert(8);
-    tree.insert(10);
-    tree.insert(13);
-    tree.insert(12);
-    tree.insert(14);
-    tree.insert(20);
-    tree.insert(18);
-    tree.insert(25);
-
-// console.log(JSON.stringify(tree, null, 2));
-
-const printNode = (value) => console.log(value)
+tree.insert(11);
+tree.insert(7);
+tree.insert(15);
+tree.insert(5);
+tree.insert(3);
+tree.insert(9);
+tree.insert(8);
+tree.insert(10);
+tree.insert(13);
+tree.insert(12);
+tree.insert(14);
+tree.insert(20);
+tree.insert(18);
+tree.insert(25);
+tree.insert(6)
 
 // 使用方式：
 console.log("Binary Search Tree:");
+// console.log(JSON.stringify(tree, null, 2));
 // printNodeVis(tree.root);
-tree.inOrderTraverse(printNode)
+// tree.inOrderTraverse(printNode)
+tree.preOrderTraverse(printNode)
 
