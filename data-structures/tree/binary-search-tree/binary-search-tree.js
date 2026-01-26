@@ -122,6 +122,44 @@ export class BinarySearchTree {
       return true
     }
   }
+
+  // 二叉搜索树中移除一个节点
+  remove(key) {
+    this.removeNode(this.root, key)
+  }
+
+  // 二叉搜索树中移除一个节点 - 辅助方法
+  removeNode(node, key) {
+    if (node == null) {
+      return null
+    }
+    if (this.compareFn(key, node.key) === Compare.LESS_THAN) {
+      node.left = this.removeNode(node.left, key)
+      return node
+    } else if (this.compareFn(key, node.key) === Compare.BIGGER_THAN) {
+      node.right = this.removeNode(node.right, key)
+      return node
+    } else {
+      // 第一种情况 - 移除一个叶节点
+      if (node.left == null && node.right == null) {
+        node = null
+        return node 
+      }
+      // 第二种情况 - 移除有一个左侧或者右侧子节点的节点
+      if (node.left == null) {
+        node = node.right
+        return node 
+      } else if (node.right == null) {
+        node = node.left
+        return node 
+      } 
+      // 第三种情况 - 移除有两个子节点的节点 - 把右侧子树的最小值移上来
+      const aux = this.minNode(node.right)
+      node.key = aux.key // 只需要更新值就行，左右侧的引用还是原先的
+      node.right = this.removeNode(node.right, aux.key) // 移除右侧子树最小值的节点
+      return node 
+    }
+  }
 }
 
 const printNode = (value) => console.log(value)
@@ -147,12 +185,14 @@ tree.insert(6)
 // 使用方式：
 console.log("Binary Search Tree:");
 // console.log(JSON.stringify(tree, null, 2));
-// printNodeVis(tree.root);
+printNodeVis(tree.root);
 // tree.inOrderTraverse(printNode)
 // tree.preOrderTraverse(printNode)
 // tree.postOrderTraverse(printNode)
 // console.log(tree.min());
 // console.log(tree.max());
 // console.log(tree.search(8));
+tree.remove(8);
+printNodeVis(tree.root);
 
 
