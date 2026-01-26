@@ -75,6 +75,36 @@ export class BinarySearchTree {
       callback(node.key)
     }
   }
+
+  // 搜索二叉搜索树的最小值
+  min() {
+    return this.minNode(this.root)
+  }
+
+  // 搜索二叉搜索树的最小值 - 辅助方法
+  minNode(node) {
+    let current = node
+    while(current != null && current.left != null) {
+      current = current.left
+    }
+    return current
+  }
+  
+  // 搜索二叉搜索树的最大值
+  max() {
+    return this.maxNode(this.root)
+  }
+
+  // 搜索二叉搜索树的最大值 - 赋值方法
+  maxNode(node) {
+    let current = node
+    while(current != null && current.right != null) {
+      current = current.right
+    }
+    return current
+  }
+
+  
 }
 
 const printNode = (value) => console.log(value)
@@ -103,5 +133,8 @@ console.log("Binary Search Tree:");
 // printNodeVis(tree.root);
 // tree.inOrderTraverse(printNode)
 // tree.preOrderTraverse(printNode)
-tree.postOrderTraverse(printNode)
+// tree.postOrderTraverse(printNode)
+// console.log(tree.min());
+console.log(tree.max());
+
 
