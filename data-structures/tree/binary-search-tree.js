@@ -1,5 +1,5 @@
-import { Compare, defaultCompare, printNodeVis } from "../../../util.js";
-import { Node } from "../../models/node.js";
+import { Compare, defaultCompare, printNodeVis } from "../../util.js";
+import { Node } from "../models/node.js";
 
 export class BinarySearchTree {
   constructor(compareFn = defaultCompare) {
@@ -160,6 +160,8 @@ export class BinarySearchTree {
       return node 
     }
   }
+
+  
 }
 
 const printNode = (value) => console.log(value)
