@@ -71,11 +71,13 @@ class AVLTree extends BinarySearchTree {
     return this.rotationLL(node)
   }
 
+  // 右-左，先右旋再左旋。
   rotationRL(node) {
     node.right = this.rotationLL(node.right)
     return this.rotationRR(node)
   }
 
-
+  // 向AVL树插入节点
+  
 
 }
