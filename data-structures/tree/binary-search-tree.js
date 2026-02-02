@@ -194,7 +194,7 @@ printNodeVis(tree.root);
 // console.log(tree.min());
 // console.log(tree.max());
 // console.log(tree.search(8));
-tree.remove(8);
-printNodeVis(tree.root);
+// tree.remove(8);
+// printNodeVis(tree.root);
 
 

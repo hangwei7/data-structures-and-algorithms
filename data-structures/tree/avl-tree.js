@@ -1,5 +1,7 @@
 import { Compare, defaultCompare, printNodeVis } from "../../util.js";
+// 在 ES6 模块中，当你导入一个模块时，该模块的所有顶层代码（包括文件底部的测试代码）都会被执行一次。
 import { BinarySearchTree } from "./binary-search-tree.js";
+import { Node } from "../models/node.js";
 
 // 计数器
 const BalanceFactor = {
@@ -78,6 +80,68 @@ class AVLTree extends BinarySearchTree {
   }
 
   // 向AVL树插入节点
-  
+  insert(key) {
+    this.root = this.insertNode(this.root, key)
+  }
+
+  // 向AVL树插入节点 - 辅助函数
+  insertNode(node, key) {
+    // 和BST树中的插入逻辑一样
+    if (node == null) {
+      return new Node(key)
+    } else if (this.compareFn(key, node.key) === Compare.LESS_THAN) {
+      node.left = this.insertNode(node.left, key) // 往下一级钻入
+    } else if (this.compareFn(key, node.key) === Compare.BIGGER_THAN) {
+      node.right = this.insertNode(node.right, key)
+    } else {
+      return node // 重复的键
+    }
+
+    // 计算平衡因子
+    const balanceFactor = this.getBalanceFactor(node)
+    // 左子树不平衡
+    if (balanceFactor === BalanceFactor.UNBALANCED_LEFT) {
+      // 插入的键值比左节点小（此时key其实已经插入进树里了，这里的key更像是它的影子）
+      if (this.compareFn(key, node.left.key) === Compare.LESS_THAN) {
+        node = this.rotationLL(node)
+      } else {
+        node = this.rotationLR(node)
+      }
+    }
+    // 右子树不平衡
+    if (balanceFactor === BalanceFactor.UNBALANCED_RIGHT) {
+      if (this.compareFn(key, node.right.key) === Compare.BIGGER_THAN) {
+        node = this.rotationRR(node)
+      } else {
+        node = this.rotationRL(node)
+      }
+    }
+
+    return node
+  }
 
 }
+
+
+const tree = new AVLTree()
+
+tree.insert(11);
+tree.insert(7);
+tree.insert(15);
+tree.insert(5);
+tree.insert(3);
+tree.insert(9);
+tree.insert(8);
+tree.insert(10);
+tree.insert(13);
+tree.insert(12);
+tree.insert(14);
+tree.insert(20);
+tree.insert(18);
+tree.insert(25);
+tree.insert(6)
+
+
+console.log("AVL Tree:");
+
+printNodeVis(tree.root);
