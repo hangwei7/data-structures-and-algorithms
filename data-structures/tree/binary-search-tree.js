@@ -185,9 +185,9 @@ tree.insert(25);
 tree.insert(6)
 
 // 使用方式：
-console.log("Binary Search Tree:");
+// console.log("Binary Search Tree:");
 // console.log(JSON.stringify(tree, null, 2));
-printNodeVis(tree.root);
+// printNodeVis(tree.root);
 // tree.inOrderTraverse(printNode)
 // tree.preOrderTraverse(printNode)
 // tree.postOrderTraverse(printNode)

@@ -120,6 +120,49 @@ class AVLTree extends BinarySearchTree {
     return node
   }
 
+  remove(key) {
+    this.removeNode(this.root, key)
+  }
+
+  removeNode(node, key) {
+    // 移除节点
+    node = super.removeNode(node, key)
+    
+    // 删干净了，不需要进行平衡
+    if(node == null) {
+      return node 
+    }
+    
+    // 下面用的是定义法(左子树不平衡，同时左子树偏重或平衡)，和insertNode的影子法，实现的效果一样。
+
+    // 检测树是否平衡
+    const balanceFactor = this.getBalanceFactor(node)
+    // 左侧不平衡
+    if (balanceFactor === BalanceFactor.UNBALANCED_LEFT) {
+      // 左子树的平衡因子
+      const balanceFactorLeft = this.getBalanceFactor(node.left)
+      if (balanceFactorLeft === BalanceFactor.BALANCED || balanceFactorLeft === BalanceFactor.SLIGHTLY_UNBALANCED_LEFT) {
+        node = this.rotationLL(node)
+      } 
+      if (balanceFactorLeft === BalanceFactor.SLIGHTLY_UNBALANCED_RIGHT) {
+        node = this.rotationLR(node)
+      }
+    }
+    // 右子树不平衡
+    if (balanceFactor === BalanceFactor.UNBALANCED_RIGHT) {
+      // 右子树的平衡因子
+      const balanceFactorRight = this.getBalanceFactor(node.right)
+      if (balanceFactorRight === BalanceFactor.BALANCED || balanceFactorRight === BalanceFactor.SLIGHTLY_UNBALANCED_RIGHT) {
+        node = this.rotationRR(node)
+      } 
+      if (balanceFactorRight === BalanceFactor.SLIGHTLY_UNBALANCED_LEFT) {
+        node = this.rotationRL(node)
+      }
+    }
+
+    return node
+  }
+
 }
 
 
@@ -140,6 +183,8 @@ tree.insert(20);
 tree.insert(18);
 tree.insert(25);
 tree.insert(6)
+
+tree.remove(7)
 
 
 console.log("AVL Tree:");
