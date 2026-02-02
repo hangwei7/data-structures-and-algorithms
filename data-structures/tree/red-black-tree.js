@@ -3,6 +3,24 @@ import { Compare, defaultCompare, printNodeVis } from "../../util.js";
 import { BinarySearchTree } from "./binary-search-tree.js";
 import { Node } from "../models/node.js";
 
+const Colors = {
+  RED: 0,
+  BLACK: 1
+};
+
+class RedBlackNode extends Node {
+    constructor(key) {
+        super(key)
+        this.key = key
+        this.color = Colors.RED
+        this.parent = null
+    }
+
+    isRed() {
+        return this.color === Colors.RED
+    }
+}
+
 class RedBlackTree extends BinarySearchTree {
     constructor(compareFn = defaultCompare) {
         super(compareFn)
@@ -10,6 +28,22 @@ class RedBlackTree extends BinarySearchTree {
         this.root = null
     }
 
-    
+    // 向红黑树中插入节点
+    insert(key) {
+        if (this.root == null) {
+            this.root = new RedBlackNode(key)
+            this.root.color = Colors.BLACK
+        } else {
+            const newNode = this.insertNode(this.root, key)
+            this.fixTreeProperties(newNode)
+        }
+    }
+
+    // 重写
+    insertNode(node, key) {
+
+    }
+
+
 }
 
