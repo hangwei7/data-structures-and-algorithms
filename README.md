@@ -14,3 +14,6 @@ JavaScript数据结构与算法练习
     - [平衡二叉搜索树（AVL树）的删除](./data-structures/tree/avl-tree/deletion.js)
   - 红黑树
     - [红黑树的插入](./data-structures/tree/red-black-tree/insertion.js)
+
+
+We build, we don't just talk.
